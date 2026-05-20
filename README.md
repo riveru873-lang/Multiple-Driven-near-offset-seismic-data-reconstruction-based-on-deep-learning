@@ -3,14 +3,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-ee4c2c.svg)](https://pytorch.org/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20302606)](https://doi.org/10.5281/zenodo.20302606)
 
 This repository contains the official implementation of the paper:
-**"Multiple-Driven Near-Offset Seismic Data Reconstruction Based on Deep Learning"** *Submitted to Computers & Geosciences*
+**"Multiple-Driven Near-Offset Seismic Data Reconstruction Based on Deep Learning"** 
 
 ## 📋 Overview
 
 This work addresses a critical challenge in marine seismic exploration: the reconstruction of large contiguous near-offset data gaps. We propose a novel physics-grounded deep learning framework that integrates the physics-based transform theory with deep learning. This integration allows our method to reconstruct missing near-offset traces with higher fidelity compared to purely data-driven or conventional interpolation methods, especially in the presence of extended gaps.
+Data used in paper can be found at DOI:https://doi.org/10.5281/zenodo.20302606.
 
 ### Key Technical Highlights:
 * A multiple-driven deep learning strategy is developed to recover missing seismic traces.
