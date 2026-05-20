@@ -1,2 +1,75 @@
-# Multiple-Driven-near-offset-seismic-data-reconstruction-based-on-deep-learning
-A novel physics-grounded deep learning framework that integrates the physics-based transform theory with deep learning.
+# Multiple-Driven Near-Offset Seismic Data Reconstruction Based on Deep Learning
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-ee4c2c.svg)](https://pytorch.org/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20302606)](https://doi.org/10.5281/zenodo.20302606)
+
+This repository contains the official implementation of the paper:
+**"Multiple-Driven Near-Offset Seismic Data Reconstruction Based on Deep Learning"** *Submitted to Computers & Geosciences*
+
+## 📋 Overview
+
+This work addresses a critical challenge in marine seismic exploration: the reconstruction of large contiguous near-offset data gaps. We propose a novel physics-grounded deep learning framework that integrates the physics-based transform theory with deep learning. This integration allows our method to reconstruct missing near-offset traces with higher fidelity compared to purely data-driven or conventional interpolation methods, especially in the presence of extended gaps.
+
+### Key Technical Highlights:
+* A multiple-driven deep learning strategy is developed to recover missing seismic traces.
+* Focal transform theory provides robust physical constraints for neural network training.
+* ResUnet integrated with hybrid loss functions improves reconstruction fidelity.
+---
+
+## 🛠️ Repository Architecture
+
+```text
+├── configs/               # Hyperparameter & data path configurations
+│   ├── unet_configs.py
+│   ├── resunet_configs.py # Default configuration file
+├── models/                # Deep learning model backbones
+│   ├── Unet.py
+│   ├── ResUnet.py
+├── src/                   # Core data engineering modules
+│   └── Seismic_dataset3.py
+├── utils.py               # Weight init, evaluation metrics, and sliding-window engine
+├── train.py               # Main training and validation script
+├── test.py                # Whole-shot inference and quantitative evaluation script
+└── requirements.txt       # Project dependencies
+```
+## 🚀 Getting Started
+# 1. Installation
+Clone the repository and install the required dependencies:
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+cd your-repo-name
+```text
+pip install -r requirements.txt
+(Dependencies include: torch, torchmetrics, torchinfo, numpy, matplotlib)
+```
+# 2. Dataset Preparation
+Ensure your data files are in raw binary format (float32, .dat). Configure the input shapes and file paths inside the corresponding configuration file (e.g., configs/resunet_configs.py):
+```text
+parser.add_argument("--SAMPLE_PATH", type=str, default="./data/train-samples-data.dat")
+parser.add_argument("--LABEL_PATH", type=str, default="./data/train-labels-data.dat")
+parser.add_argument("--DIM", type=tuple, default=(nt, nx, n_shots)) # (nt, nx, n_shots)
+```
+# 3. Model Training
+Run train.py to start training. The pipeline supports automatic GPU device discovery, training/validation data splitting ($80\%/20\%$), and logs real-time curves inside the ./outputs folder.
+```text
+python train.py
+```
+Note: You can switch the backbone model by modifying the network_model variable in train.py among ['unet', 'denseunet', 'resunet', 'rdbunet'].
+
+# 4. Evaluation & Inference
+Execute test.py to load a trained model checkpoint, perform whole-shot high-fidelity interpolation, and compute standard production metrics:
+```text
+python test.py
+```
+## 📜Citation
+If you find this codebase or the associated methodology useful for your research, please cite our work:
+```text
+@article{multi_driven_seismic_2026,
+  author    = {Zhina Li and Zhichuan Yu},
+  title     = {Multiple-Driven Near-Offset Seismic Data Reconstruction Based on Deep Learning},
+  journal   = {Computers & Geosciences},
+  year      = {2026},
+  note      = {Submitted}
+}
+```
