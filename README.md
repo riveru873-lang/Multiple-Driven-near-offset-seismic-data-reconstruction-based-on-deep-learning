@@ -1,5 +1,6 @@
 # Multiple-Driven Near-Offset Seismic Data Reconstruction Based on Deep Learning
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20302606-blue.svg)](https://doi.org/10.5281/zenodo.20302606)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-ee4c2c.svg)](https://pytorch.org/)
@@ -10,7 +11,6 @@ This repository contains the official implementation of the paper:
 ## 📋 Overview
 
 This work addresses a critical challenge in marine seismic exploration: the reconstruction of large contiguous near-offset data gaps. We propose a novel physics-grounded deep learning framework that integrates the physics-based transform theory with deep learning. This integration allows our method to reconstruct missing near-offset traces with higher fidelity compared to purely data-driven or conventional interpolation methods, especially in the presence of extended gaps.
-Data used in paper can be found at DOI:https://doi.org/10.5281/zenodo.20302606.
 
 ### Key Technical Highlights:
 * A multiple-driven deep learning strategy is developed to recover missing seismic traces.
@@ -29,12 +29,21 @@ Data used in paper can be found at DOI:https://doi.org/10.5281/zenodo.20302606.
 │   ├── ResUnet.py
 ├── src/                   # Core data engineering modules
 │   └── Seismic_dataset3.py
+├── data                   #data
 ├── utils.py               # Weight init, evaluation metrics, and sliding-window engine
 ├── train.py               # Main training and validation script
 ├── test.py                # Whole-shot inference and quantitative evaluation script
 └── requirements.txt       # Project dependencies
 ```
-## 🚀 Getting Started
+
+##  Dataset Preparation
+Due to the massive storage footprint , the raw seismic datasets are permanently hosted on Zenodo.
+1. **Download the Dataset:** Access the raw binary files (`.dat`) via the official DOI: [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20302606-blue.svg)](https://doi.org/10.5281/zenodo.20302606)
+   or directly access: [https://doi.org/10.5281/zenodo.20302606](https://doi.org/10.5281/zenodo.20302606)
+2. **Data Placement:**
+   Download and place the raw `.dat` files into your local `./data/` directory.
+   
+##  Getting Started
 # 1. Installation
 Clone the repository and install the required dependencies:
 git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
@@ -62,7 +71,7 @@ Execute test.py to load a trained model checkpoint, perform whole-shot high-fide
 ```text
 python test.py
 ```
-## 📜Citation
+## Citation
 If you find this codebase or the associated methodology useful for your research, please cite our work:
 ```text
 @article{multi_driven_seismic_2026,
