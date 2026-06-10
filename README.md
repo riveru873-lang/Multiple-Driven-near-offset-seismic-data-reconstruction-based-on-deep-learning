@@ -1,6 +1,5 @@
 # Multiple-Driven Near-Offset Seismic Data Reconstruction Based on Deep Learning
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20302606-blue.svg)](https://doi.org/10.5281/zenodo.20302606)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-ee4c2c.svg)](https://pytorch.org/)
@@ -45,15 +44,7 @@ Two independent datasets are used in this study. Both are publicly archived on Z
 | **Synthetic Dataset** | Pluto and diffraction models with various missing gap configurations (miss20, miss40, miss60). Used for model training and ablation studies. | [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20603084-blue.svg)](https://doi.org/10.5281/zenodo.20603084) |
 | **Field Dataset** | Real marine seismic data with 40 contiguous missing near-offset traces. Used for method validation on real-world data. | [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20623128-blue.svg)](https://doi.org/10.5281/zenodo.20623128) |
 
-> **Note for Reviewers**: Due to proprietary restrictions, the field dataset is shared under a restricted access license. Please contact the corresponding author if you encounter any access issues.
-
-### Download Instructions
-
-1. **Synthetic Dataset**: Download via [https://doi.org/10.5281/zenodo.20603084](https://doi.org/10.5281/zenodo.20603084)
-2. **Field Dataset**: Download via [https://doi.org/10.5281/zenodo.20623128](https://doi.org/10.5281/zenodo.20623128)
-1. **Download the Dataset:** Access the raw binary files (`.dat`) via the official DOI: [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20302606-blue.svg)](https://doi.org/10.5281/zenodo.20302606)
-   or directly access: [https://doi.org/10.5281/zenodo.20302606](https://doi.org/10.5281/zenodo.20302606)
-2. **Data Placement:**
+ **Data Placement:**
    Download and place the raw `.dat` files into your local `./data/` directory.
    
 ##  Getting Started
