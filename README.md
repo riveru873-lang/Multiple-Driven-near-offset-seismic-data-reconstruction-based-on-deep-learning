@@ -36,8 +36,21 @@ This work addresses a critical challenge in marine seismic exploration: the reco
 └── requirements.txt       # Project dependencies
 ```
 
-##  Dataset Preparation
-Due to the massive storage footprint , the raw seismic datasets are permanently hosted on Zenodo.
+##  Data Availability
+
+Two independent datasets are used in this study. Both are publicly archived on Zenodo with their own DOIs:
+
+| Dataset | Description | DOI |
+| :--- | :--- | :--- |
+| **Synthetic Dataset** | Pluto and diffraction models with various missing gap configurations (miss20, miss40, miss60). Used for model training and ablation studies. | [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20603084-blue.svg)](https://doi.org/10.5281/zenodo.20603084) |
+| **Field Dataset** | Real marine seismic data with 40 contiguous missing near-offset traces. Used for method validation on real-world data. | [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20623128-blue.svg)](https://doi.org/10.5281/zenodo.20623128) |
+
+> **Note for Reviewers**: Due to proprietary restrictions, the field dataset is shared under a restricted access license. Please contact the corresponding author if you encounter any access issues.
+
+### Download Instructions
+
+1. **Synthetic Dataset**: Download via [https://doi.org/10.5281/zenodo.20603084](https://doi.org/10.5281/zenodo.20603084)
+2. **Field Dataset**: Download via [https://doi.org/10.5281/zenodo.20623128](https://doi.org/10.5281/zenodo.20623128)
 1. **Download the Dataset:** Access the raw binary files (`.dat`) via the official DOI: [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20302606-blue.svg)](https://doi.org/10.5281/zenodo.20302606)
    or directly access: [https://doi.org/10.5281/zenodo.20302606](https://doi.org/10.5281/zenodo.20302606)
 2. **Data Placement:**
