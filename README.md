@@ -46,7 +46,7 @@ Two independent datasets are used in this study. Both are publicly archived on Z
 ##  Getting Started
 # 1. Installation
 Clone the repository and install the required dependencies:
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+git clone [https://github.com/riveru873-lang/Multiple-Driven-near-offset-seismic-data-reconstruction-based-on-deep-learning.git]
 cd your-repo-name
 ```text
 pip install -r requirements.txt
