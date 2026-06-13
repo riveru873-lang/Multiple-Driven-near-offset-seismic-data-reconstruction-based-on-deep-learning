@@ -11,10 +11,6 @@ This repository contains the official implementation of the paper:
 
 This work addresses a critical challenge in marine seismic exploration: the reconstruction of large contiguous near-offset data gaps. We propose a novel physics-grounded deep learning framework that integrates the physics-based transform theory with deep learning. This integration allows our method to reconstruct missing near-offset traces with higher fidelity compared to purely data-driven or conventional interpolation methods, especially in the presence of extended gaps.
 
-### Key Technical Highlights:
-* A multiple-driven deep learning strategy is developed to recover missing seismic traces.
-* Focal transform theory provides robust physical constraints for neural network training.
-* ResUnet integrated with hybrid loss functions improves reconstruction fidelity.
 ---
 
 ## 🛠️ Repository Architecture
