@@ -60,12 +60,6 @@ parser.add_argument("--DIM", type=tuple, default=(nt, nx, n_shots)) # (nt, nx, n
 ```
 # 3. Model Training
 
-Run the training pipeline with:
-
-```bash
-python train.py
-```
-
 ### Configuration
 
 All hyperparameters are managed in `configs/<model>_configs.py`. Key parameters:
@@ -125,6 +119,61 @@ Execute test.py to load a trained model checkpoint, perform whole-shot high-fide
 ```text
 python test.py
 ```
+## 4. Evaluation & Inference
+
+### Configuration
+
+Before running, edit the parameters at the top of `test.py`:
+
+**Data & Shot Selection**
+
+| Parameter | Example | Description |
+|---|---|---|
+| `pth_dir` | `./outputs/2026-05-07~15h56min-resunet` | Path to trained model checkpoint directory |
+| `sample_path` | `./data/.../test-samples.dat` | Path to input (missing-trace) seismic file |
+| `label_path` | `./data/.../test-labels.dat` | Path to reference (full) seismic file |
+| `dim` | `(783, 367, 700)` | Data dimensions `(nt, nx, n_shots)` |
+| `shot_index` | `390` | Index of the shot gather to reconstruct |
+| `interpolate_begin` | `230` | First missing trace index (for visualization) |
+| `interpolate_end` | `250` | Last missing trace index (for visualization) |
+
+### Inference Pipeline
+
+The script performs the following steps automatically:
+
+1. **Model loading** — architecture and weights are restored from `pth_dir/model.pth` and `pth_dir/resunet_configs.py`
+2. **Normalization** — input and label volumes are normalized by the global absolute maximum of the label
+3. **Patch-based inference** — reconstruction is performed shot-by-shot via `model_use_block()` with 50% patch overlap to suppress blocking artifacts
+4. **Output writing** — reconstructed shot and residual are saved as binary `.dat` files:
+   - `pth_dir/output.dat` — reconstructed gather
+   - `pth_dir/res.dat` — difference (label − output)
+
+### Metrics
+
+Four quantitative metrics are computed and printed for the selected shot:
+
+| Metric | Description |
+|---|---|
+| `SNR` | Signal-to-noise ratio (dB) |
+| `MSE` | Mean squared error |
+| `PSNR` | Peak signal-to-noise ratio (dB) |
+| `SSIM` | Structural similarity index |
+
+```text
+SNR=28.3421, MSE=0.000312, PSNR=35.0621, SSIM=0.9873
+```
+
+### Visualization
+
+`plot_seismic_results()` generates a side-by-side seismic wiggle/image comparison of the reference gather and the reconstruction, with metric annotations and the interpolated zone highlighted. The figure is saved automatically to `pth_dir/`.
+
+Key display parameters (editable in the `plot_seismic_results()` call):
+
+| Parameter | Default | Description |
+|---|---|---|
+| `dt` | `0.004` | Time sampling interval (s) |
+| `dx` | `10` | Trace spacing (m) |
+| `vmin` / `vmax` | `-0.15` / `0.15` | Amplitude clip range |
 ## Citation
 If you find this codebase or the associated methodology useful for your research, please cite our work:
 ```text
