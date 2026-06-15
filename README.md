@@ -59,11 +59,66 @@ parser.add_argument("--LABEL_PATH", type=str, default="./data/train-labels-data.
 parser.add_argument("--DIM", type=tuple, default=(nt, nx, n_shots)) # (nt, nx, n_shots)
 ```
 # 3. Model Training
+
+Run the training pipeline with:
+
+```bash
+python train.py
+```
+
+### Configuration
+
+All hyperparameters are managed in `configs/<model>_configs.py`. Key parameters:
+
+**Training**
+
+| Parameter | Default | Description |
+|---|---|---|
+| `LEARNING_RATE` | `1e-4` | Adam optimizer learning rate |
+| `BATCH_SIZE` | `16` | Mini-batch size |
+| `NUM_EPOCHS` | `10` | Total training epochs |
+| `BETA1` / `BETA2` | `0.9` / `0.999` | Adam momentum terms |
+| `WEIGHT_DECAY` | `1e-5` | L2 regularization strength |
+
+**Model Architecture**
+
+| Parameter | Default | Description |
+|---|---|---|
+| `BASE_CHANNELS` | `16` | Base feature channel width |
+| `DEPTH` | `5` | Encoder/decoder depth |
+| `ACT_TYPE` | `SiLU` | Activation function |
+| `NORM_LAYER` | `Group` | Normalization type |
+| `DROPOUT` | `0.0` | Dropout rate |
+| `ATTN_LAYERS` | `None` | Indices of layers with attention (e.g. `[0,1]`) |
+
+**Dataset**
+
+| Parameter | Default | Description |
+|---|---|---|
+| `SAMPLE_PATH` | `./data/.../samples.dat` | Path to input seismic samples |
+| `LABEL_PATH` | `./data/.../labels.dat` | Path to reconstruction labels |
+| `DIM` | `(331, 101, 30)` | Data dimensions `(nt, nx, n_shots)` |
+| `BLOCK_SIZE` | `(128, 64)` | Patch size `(time, space)` |
+| `STRIDE` | `(16, 8)` | Patch extraction stride |
+
+### Training Pipeline
+
+The script performs the following steps automatically:
+
+1. **Data splitting** — dataset is randomly split 80% train / 20% validation at the patch level
+2. **Loss function** — composite loss combining L1 and SSIM: `L = L1(out, label) + λ · (1 − SSIM(out, label))`, where λ is adaptively scheduled based on validation SSIM
+3. **Metrics** — SSIM and PSNR are computed on the validation set each epoch and logged in real time
+4. **Output** — training curves (loss, SSIM, PSNR vs. epoch) are saved to `./outputs/<timestamp>-<model>/`
+
+### Saved Outputs
+
+After training completes, the following are written to `./outputs/<timestamp>-<model>/`:
+
 Run train.py to start training. The pipeline supports automatic GPU device discovery, training/validation data splitting ($80\%/20\%$), and logs real-time curves inside the ./outputs folder.
 ```text
 python train.py
 ```
-Note: You can switch the backbone model by modifying the network_model variable in train.py among ['unet', 'denseunet', 'resunet', 'rdbunet'].
+
 
 # 4. Evaluation & Inference
 Execute test.py to load a trained model checkpoint, perform whole-shot high-fidelity interpolation, and compute standard production metrics:
